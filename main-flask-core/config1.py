@@ -1,5 +1,4 @@
-from distutils.log import debug
-from matplotlib import testing
+
 
 
 class Config(object):

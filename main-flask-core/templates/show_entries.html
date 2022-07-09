@@ -1,0 +1,24 @@
+{% extends 'base.html' %}
+
+{% block body %}
+{% if session.logged_in %}
+<form action="{{ url_for('add_entry') }}" method="post" class="add-entry">
+    <dl>
+        <dt>Название</dt>
+        <dd><input type="text" size="30" name="title" ></dd>
+        <dd><textarea name="text"  cols="40" rows="5"></textarea></dd>
+        <dd><input type="submit" value="Поделиться"  ></dd>
+    </dl>
+</form>
+{% endif %}
+<ul class= etries>
+
+{% for entry in entries %}
+<li>
+    <h2>{{ entry.title }}</h2>{{ entry.text|safe }}
+</li>
+{% else %}
+<li><em>Здесь пока еще нет записей</em></li>
+{% endfor %}
+</ul>
+{% endblock %}
