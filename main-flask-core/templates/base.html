@@ -1,0 +1,13 @@
+<!doctype html>
+<html>
+	<head>
+		{% block head %}
+		<link rel="stylesheet" href="/main-flask-core/static/style.css">
+		<title>vkIO</title>
+		{% endblock %}
+	</head>
+	<body>
+		<div id="content">{% block content %} {% end block %}</div>
+		<div id="footer">&copy; Copyright 2022 by me</div>
+	</body>
+</html>
