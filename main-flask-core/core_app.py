@@ -58,10 +58,10 @@ def show_entries():
 
     db = get_db()
     cur = db.cursor()
-    cur.execute('''SELECT title,text FROM entries ORDER BY id DESC''')
+    cur.execute('SELECT title, text FROM entries ORDER BY id DESC')
     entries = cur.fetchall()
 
-    return render_template('show_entries.html',enteries = entries)
+    return render_template('show_entries.html',entries = entries)
 
 
 @app.route('/add', methods=['POST'])
