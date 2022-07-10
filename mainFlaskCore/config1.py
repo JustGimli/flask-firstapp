@@ -1,10 +1,10 @@
 #conf
 class Config(object):
-    SECRET_KEY = 'key',
-    DEBUG = False,
-    TESTING = False,
+    SECRET_KEY = 'key'
+    DEBUG = False
+    TESTING = False
     DATABASE = 'mainFlaskCore/user.db'
-    USERNAME = 'admin',
+    USERNAME = 'admin'
     PASSWORD = 'default'
 
 class testingConfig(Config):

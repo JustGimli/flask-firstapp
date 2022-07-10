@@ -8,7 +8,7 @@ from mainFlaskCore.config1 import *
 
 app = Flask(__name__)
 app.config.from_object(testingConfig)
-app.config.from_envvar( 'FLASKR_SETTINGS' , silent=True)
+
 
 
 def connect_db():
@@ -45,7 +45,6 @@ def close_db(error):
 
 @app.route('/')
 def show_entries():
-    print(os.path.join(app.root_path,'user.db'))
     db = get_db()
     cur = db.cursor()
     cur.execute('SELECT title, text FROM entries ORDER BY id DESC')
@@ -56,13 +55,17 @@ def show_entries():
 
 @app.route('/add', methods=['POST'])
 def add_entry():
+
     if not session.get('logged_in'):
         abort(401)
 
-    db = get_db()
-    db.execute('INSERT INTO entries (title,text) VALUES(?,?)',[request.form['title'],request.form['text']])
-    db.commit()
-    flash('Новый пост был добавлен)')
+    if request.form['title'] == '' or request.form['text'] == '':
+        flash('Извините. Введите текст')
+    else:
+        db = get_db()
+        db.execute('INSERT INTO entries (title,text) VALUES(?,?)',[request.form['title'],request.form['text']])
+        db.commit()
+        flash('Новый пост был добавлен)')
 
     return redirect(url_for('show_entries'))
 
@@ -72,7 +75,6 @@ def login():
     error = None
 
     if request.method == 'POST':
-
         if request.form['username'] != app.config['USERNAME'] or request.form['password'] != app.config['PASSWORD']:
 
             error = 'Неверный логин или пароль'
