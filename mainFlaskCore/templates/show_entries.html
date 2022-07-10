@@ -12,7 +12,7 @@
 </form>
 {% endif %}
 <ul class= etries>
-
+<article>
 {% for entry in entries %}
 <li>
     <h2>{{ entry.title }}</h2>{{ entry.text|safe }}
@@ -21,4 +21,5 @@
 <li><em>Здесь пока еще нет записей</em></li>
 {% endfor %}
 </ul>
+</article>
 {% endblock %}

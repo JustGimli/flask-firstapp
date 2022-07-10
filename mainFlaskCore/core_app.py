@@ -3,21 +3,11 @@ from ntpath import join
 from flask import redirect, render_template, Flask, g, abort, flash, url_for,request,session
 import sqlite3
 import os
+from mainFlaskCore.config1 import *
 
 
 app = Flask(__name__)
-app.config.from_object(__name__)
-
-# conf
-app.config.update(dict(
-    SECRET_KEY = 'key',
-    DEBUG = True,
-    TESTING = True,
-    DATABASE = os.path.join(app.root_path,'user.db'),
-    USERNAME = 'admin',
-    PASSWORD = 'default',
-))
-
+app.config.from_object(testingConfig)
 app.config.from_envvar( 'FLASKR_SETTINGS' , silent=True)
 
 
@@ -55,7 +45,7 @@ def close_db(error):
 
 @app.route('/')
 def show_entries():
-
+    print(os.path.join(app.root_path,'user.db'))
     db = get_db()
     cur = db.cursor()
     cur.execute('SELECT title, text FROM entries ORDER BY id DESC')
@@ -66,7 +56,6 @@ def show_entries():
 
 @app.route('/add', methods=['POST'])
 def add_entry():
-
     if not session.get('logged_in'):
         abort(401)
 
