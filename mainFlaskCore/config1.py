@@ -9,6 +9,6 @@ class Config(object):
 
 class testingConfig(Config):
     DEBUG = True
-    TESTING = False
+    TESTING = True
 
 
