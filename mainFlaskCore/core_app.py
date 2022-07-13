@@ -10,6 +10,20 @@ app = Flask(__name__)
 app.config.from_object(testingConfig)
 
 
+def send_mail():
+    if not app.debug:
+        import logging
+        from logging.handlers import SMTPHandler
+        mail_handler = SMTPHandler('127.0.0.1',
+                               'server-error@example.com',
+                               'aleksnermer@gmail.com', 'YourApplication Failed')
+        mail_handler.setLevel(logging.ERROR)
+        app.logger.addHandler(mail_handler)
+
+        handler = logging.FileHandler('mainFlaskCore/logging')
+        handler.setLevel(logging.WARNING)
+        app.logger.addHandler(handler)
+
 
 def connect_db():
 
@@ -99,4 +113,7 @@ def logout():
 
 
 if __name__ == '__main__':
-    app.run()
+    try :
+        app.run()
+    except:
+        send_mail()
