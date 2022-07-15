@@ -112,11 +112,14 @@ def logout():
 
 @app.route('/enter',methods=['GET','POST'])
 def enter():
+    
     if request.method == 'POST':
         add_user(request.form['username_enter'],request.form['password_enter'])
         session['logged_in'] = True
         flash('Вы зарегистрировались')
+
         return redirect(url_for('show_entries'))
+        
     return render_template('enter.html')
 
 if __name__ == '__main__':

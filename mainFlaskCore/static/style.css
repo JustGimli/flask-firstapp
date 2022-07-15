@@ -47,6 +47,17 @@ font-weight: bold;
     background-color: blue;
 }
 
+.url{
+    margin-left: auto;
+    background-color: red;
+}
+
+.form{
+    margin: auto;
+    padding: 10px;
+    width: 200px;
+}
+
 .sumb1:hover{
     background-color: white;
     border-radius: 10px;

@@ -3,9 +3,10 @@
 	<head>
 		<link rel=stylesheet type=text/css href="{{ url_for('static', filename='style.css') }}">
 		<title>vkIO</title>
+		{% block head %}{% endblock %}
 	</head>
 	<body>
-		<div class='metanaw'>
+		<div class="url">
 			{% if not session.logged_in %}
 			<a href="{{url_for('login')}}">Войти</a>
 			<a href="{{url_for('enter')}}">зарегистрироваться</a>
