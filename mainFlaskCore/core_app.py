@@ -1,10 +1,7 @@
-from importlib.resources import path
-from ntpath import join
 from flask import redirect, render_template, Flask, g, abort, flash, url_for,request,session
 import sqlite3
-import os
 from mainFlaskCore.config1 import *
-
+from mainFlaskCore.db import *
 
 app = Flask(__name__)
 app.config.from_object(testingConfig)
@@ -59,6 +56,7 @@ def close_db(error):
 
 @app.route('/')
 def show_entries():
+    print(session,g)
     db = get_db()
     cur = db.cursor()
     cur.execute('SELECT title, text FROM entries ORDER BY id DESC')
@@ -79,7 +77,7 @@ def add_entry():
         db = get_db()
         db.execute('INSERT INTO entries (title,text) VALUES(?,?)',[request.form['title'],request.form['text']])
         db.commit()
-        flash('Новый пост был добавлен)')
+        flash('Новый пост был добавлен)')   
 
     return redirect(url_for('show_entries'))
 
@@ -89,7 +87,7 @@ def login():
     error = None
 
     if request.method == 'POST':
-        if request.form['username'] != app.config['USERNAME'] or request.form['password'] != app.config['PASSWORD']:
+        if get_user_data(request.form['username'],request.form['password']) == False:
 
             error = 'Неверный логин или пароль'
 
@@ -111,6 +109,15 @@ def logout():
 
     return redirect(url_for('show_entries'))
 
+
+@app.route('/enter',methods=['GET','POST'])
+def enter():
+    if request.method == 'POST':
+        add_user(request.form['username_enter'],request.form['password_enter'])
+        session['logged_in'] = True
+        flash('Вы зарегистрировались')
+        return redirect(url_for('show_entries'))
+    return render_template('enter.html')
 
 if __name__ == '__main__':
     try :

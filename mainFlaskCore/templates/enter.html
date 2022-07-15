@@ -1,0 +1,15 @@
+
+{% extends 'base.html' %}
+{%  block body %}
+<dif class="form">
+    <form action="{{ url_for('enter') }}" method=post >
+        <dl>
+            <dt>Логин:
+            <dd><input type=text name=username_enter>
+            <dt>Пароль:
+            <dd><input type=password name=password_enter>
+            <dd><input type=submit value='зарегистрироваться'>
+        </dl>
+    </form>
+    </dif>
+{% endblock %}

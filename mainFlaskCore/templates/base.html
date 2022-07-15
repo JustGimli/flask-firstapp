@@ -8,8 +8,7 @@
 		<div class='metanaw'>
 			{% if not session.logged_in %}
 			<a href="{{url_for('login')}}">Войти</a>
-			{% else %}
-			<a href="{{url_for('logout')}}"></a>
+			<a href="{{url_for('enter')}}">зарегистрироваться</a>
 			{% endif %}
 		</div>
 
