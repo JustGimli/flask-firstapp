@@ -124,6 +124,6 @@ def enter():
 
 if __name__ == '__main__':
     try :
-        app.run()
+        app.run(debug=True)
     except:
         send_mail()

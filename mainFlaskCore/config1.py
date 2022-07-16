@@ -4,8 +4,6 @@ class Config(object):
     DEBUG = False
     TESTING = False
     DATABASE = 'mainFlaskCore/user.db'
-    USERNAME = 'admin'
-    PASSWORD = 'default'
 
 class testingConfig(Config):
     DEBUG = True
